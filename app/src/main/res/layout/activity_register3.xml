@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Register3">
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back" />
+
+    <RelativeLayout
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_above="@id/email"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/logo" />
+    </RelativeLayout>
+
+    <EditText
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:id="@+id/email"
+        android:layout_above="@id/alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:hint="Email"
+        android:paddingHorizontal="20dp"
+        android:textColor="#99ada6"
+        android:layout_marginBottom="20dp"
+        android:textColorHint="#99ada6"
+        android:textSize="15sp" />
+
+    <EditText
+        android:maxLines="1"
+        android:layout_centerInParent="true"
+        android:id="@+id/alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:hint="Alamat"
+        android:paddingHorizontal="20dp"
+        android:textColor="#99ada6"
+        android:textColorHint="#99ada6"
+        android:textSize="15sp" />
+
+    <EditText
+        android:maxLines="1"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/alamat"
+        android:id="@+id/notelp"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:hint="No Telp"
+        android:paddingHorizontal="20dp"
+        android:textColor="#99ada6"
+        android:textColorHint="#99ada6"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/selanjunya"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@id/nama"
+        android:layout_above="@id/bunder"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/buttonnext"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/selanjutnya" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/bunder"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bunder3" />
+    </RelativeLayout>
+
+</RelativeLayout>

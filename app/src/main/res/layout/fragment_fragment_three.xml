@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".FragmentThree">
+
+    <LinearLayout
+        android:id="@+id/satu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/upload"
+                android:gravity="center"
+                android:textColor="#17a0b3"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:text="SELESAI"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/postimage"
+        android:maxHeight="200dp"
+        android:background="@drawable/background"
+        android:adjustViewBounds="true"
+        android:layout_height="200dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:rotation="180"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/leftarrow"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:textColor="#333030"
+            android:id="@+id/judul"
+            android:hint="Tulis Keterangan..."
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:paddingHorizontal="10dp"
+            android:id="@+id/deskripsi"
+            android:layout_width="match_parent"
+            android:hint="Tambahkan Caption"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Register1">
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_above="@id/nama"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/nama" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/nama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:hint="Masukkan Nama Anda"
+        android:paddingHorizontal="20dp"
+        android:textColor="#99ada6"
+        android:textColorHint="#99ada6"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/selanjunya"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@id/nama"
+        android:layout_above="@id/bunder"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/buttonnext"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/selanjutnya" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/bunder"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bunder" />
+    </RelativeLayout>
+
+</RelativeLayout>

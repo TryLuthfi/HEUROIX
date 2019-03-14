@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentFour">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_below="@id/satu"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="#a69393"
+            android:id="@+id/loading"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_below="@id/satu"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dua"
+            android:layout_marginVertical="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gambar2"
+                android:layout_width="70dp"
+                android:layout_height="70dp" />
+
+            <TextView
+                android:id="@+id/nama2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/tiga"
+            android:layout_below="@id/dua"
+            android:background="#33c4d7"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#fff"
+                android:text="POSTINGAN"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/tiga"
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:id="@+id/recylcerView"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_below="@id/tiga"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="#a69393"
+                android:id="@+id/loading2"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

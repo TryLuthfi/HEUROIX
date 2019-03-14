@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="heuroix.myapps.com.heuroix">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ico"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ico"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Register1" />
+        <activity android:name=".Register2" />
+        <activity android:name=".Register3" />
+        <activity android:name=".Register4" />
+        <activity android:name=".Home" />
+        <activity android:name=".FragmentActivity" />
+        <activity android:name=".ContentClicked" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".Profile_Preview"></activity>
+    </application>
+
+</manifest>
