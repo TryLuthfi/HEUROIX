@@ -245,19 +245,4 @@ public class Profile_Preview extends AppCompatActivity {
         //adding our stringrequest to queue
         Volley.newRequestQueue(Profile_Preview.this).add(stringRequest);
     }
-//    @OnClick(R.id. btn1 )
-//    public void onBtnFragment1Clicked() {
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//        fragmentTransaction.replace(R.id. frame_container , new FragmentOne());
-//        fragmentTransaction.commit();
-//    }
-//
-//    @OnClick(R.id. btn2 )
-//    public void onBtnFragment2Clicked() {
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//        fragmentTransaction.replace(R.id. frame_container , new FragmentTwo());
-//        fragmentTransaction.commit();
-//    }
 }
