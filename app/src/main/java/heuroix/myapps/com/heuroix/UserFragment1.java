@@ -2,16 +2,19 @@ package heuroix.myapps.com.heuroix;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,17 +35,19 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentTwo extends Fragment {
-
-    private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreviewrandom.php";
-    Context context;
-    private static final int NUM_COLUMNS = 2;
-    List<ContentFoto> productList;
-    RecyclerView recyclerView;
-    View view;
+public class UserFragment1 extends Fragment {
     private ProgressBar loading;
 
-    public FragmentTwo() {
+    private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreview.php";
+    Context context;
+    private static final int NUM_COLUMNS = 3;
+    List<Content> productList;
+    RecyclerView recyclerView;
+    View view;
+
+
+    public UserFragment1() {
+        // Required empty public constructor
     }
 
 
@@ -50,28 +55,22 @@ public class FragmentTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_fragment_two, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_fragment1, container, false);
+
         productList = new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.recylcerView);
-        StaggeredRecyclerViewAdapter staggeredRecyclerViewAdapter =
-                new StaggeredRecyclerViewAdapter(getActivity(), productList);
+        StaggeredRecyclerViewAdapterdua staggeredRecyclerViewAdapterdua =
+                new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        recyclerView.setAdapter(staggeredRecyclerViewAdapter);
+        recyclerView.setAdapter(staggeredRecyclerViewAdapterdua);
 
         loading = view.findViewById(R.id.loading);
         loading.setVisibility(View.VISIBLE);
 
-
-
-//        recyclerView = view.findViewById(R.id.recylcerView);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         loadProducts();
-
-        return view;
+        return  view;
     }
 
     private void loadProducts() {
@@ -93,20 +92,23 @@ public class FragmentTwo extends Fragment {
                                 JSONObject product = array.getJSONObject(i);
 
                                 //adding the product to product list
-                                productList.add(new ContentFoto(
-                                        product.getString("id_content"),
-                                        product.getString("id_user"),
-                                        product.getString("judul"),
-                                        product.getString("gambar"),
-                                        product.getString("deskripsi"),
-                                        product.getString("date_created"),
-                                        product.getString("nama"),
-                                        product.getString("email"),
-                                        product.getString("userimage")
-                                ));
+                                String id_user = getId_user();
+                                if (id_user.equals(product.getString("id_user"))) {
+                                    productList.add(new Content(
+                                            product.getString("id_content"),
+                                            product.getString("id_user"),
+                                            product.getString("judul"),
+                                            product.getString("gambar"),
+                                            product.getString("deskripsi"),
+                                            product.getString("date_created"),
+                                            product.getString("nama"),
+                                            product.getString("email"),
+                                            product.getString("userimage")
+                                    ));
+                                }
                             }
 
-                            StaggeredRecyclerViewAdapter adapter = new StaggeredRecyclerViewAdapter(getActivity(), productList);
+                            StaggeredRecyclerViewAdapterdua adapter = new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
 
                             if (adapter != null){
                                 recyclerView.setAdapter(adapter);
@@ -132,6 +134,12 @@ public class FragmentTwo extends Fragment {
 
         //adding our stringrequest to queue
         Volley.newRequestQueue(Objects.requireNonNull(getActivity())).add(stringRequest);
+    }
+
+    private String getId_user(){
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String id_user = preferences.getString("id_user", "null");
+        return id_user;
     }
 
 }

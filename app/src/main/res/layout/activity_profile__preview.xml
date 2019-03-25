@@ -37,6 +37,7 @@
             android:gravity="center">
 
             <ImageView
+                android:onClick="back"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:background="@drawable/cross" />

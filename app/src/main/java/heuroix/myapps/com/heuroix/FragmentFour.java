@@ -4,11 +4,13 @@ package heuroix.myapps.com.heuroix;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -56,14 +58,6 @@ public class FragmentFour extends Fragment {
     private RelativeLayout linear;
     private ProgressBar loading, loading2;
 
-    private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreview.php";
-    Context context;
-    private static final int NUM_COLUMNS = 3;
-    List<Content> productList;
-    RecyclerView recyclerView;
-    View view;
-
-
     public FragmentFour() {
         // Required empty public constructor
     }
@@ -73,32 +67,56 @@ public class FragmentFour extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_fragment_four, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_four, container, false);
 
-        productList = new ArrayList<>();
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
-        recyclerView = view.findViewById(R.id.recylcerView);
-        StaggeredRecyclerViewAdapterdua staggeredRecyclerViewAdapterdua =
-                new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        recyclerView.setAdapter(staggeredRecyclerViewAdapterdua);
+        fragmentTransaction.add(R.id.frame_container, new UserFragment1());
+        fragmentTransaction.commit();
 
-        loadProducts();
+        final LinearLayout btn1 = view.findViewById(R.id.btn_fragment1);
+        final LinearLayout btn2 = view.findViewById(R.id.btn_fragment2);
+        final ImageView icon1 = view.findViewById(R.id.icon1);
+        final ImageView icon2 = view.findViewById(R.id.icon2);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon1.setBackgroundResource(R.drawable.listafter);
+                icon2.setBackgroundResource(R.drawable.rectangle);
+//                btn2.setTextColor(Color.parseColor("#c23c1b"));
+//                btn1.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent ));
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id. frame_container , new UserFragment1());
+                fragmentTransaction.commit();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon1.setBackgroundResource(R.drawable.list);
+                icon2.setBackgroundResource(R.drawable.rectangleafter);
+//                btn1.setTextColor(Color.parseColor("#c23c1b"));
+//                btn2.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent ));
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id. frame_container , new UserFragment2());
+                fragmentTransaction.commit();
+            }
+        });
 
-        nama2= view.findViewById(R.id.nama2);
+        nama2 = view.findViewById(R.id.nama2);
         gambar2 = view.findViewById(R.id.gambar2);
         linear = view.findViewById(R.id.linear);
         loading = view.findViewById(R.id.loading);
-        loading2 = view.findViewById(R.id.loading2);
 
         linear.setVisibility(View.INVISIBLE);
         loading.setVisibility(View.VISIBLE);
-        loading2.setVisibility(View.VISIBLE);
 
         getJSON();
 
-        return  view;
+        return view;
     }
 
     @SuppressLint("SetTextI18n")
@@ -171,68 +189,6 @@ public class FragmentFour extends Fragment {
         }
         GetJSON gj = new GetJSON();
         gj.execute();
-    }
-    private void loadProducts() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PRODUCTS,
-
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            //converting the string to json array object
-                            JSONArray array = new JSONArray(response);
-
-
-                            //traversing through all the object
-                            for (int i = 0; i < array.length(); i++) {
-
-                                //getting product object from json array
-                                JSONObject product = array.getJSONObject(i);
-
-                                //adding the product to product list
-                                String id_user = getId_user();
-                                if (id_user.equals(product.getString("id_user"))) {
-                                    productList.add(new Content(
-                                            product.getString("id_content"),
-                                            product.getString("id_user"),
-                                            product.getString("judul"),
-                                            product.getString("gambar"),
-                                            product.getString("deskripsi"),
-                                            product.getString("date_created"),
-                                            product.getString("nama"),
-                                            product.getString("email"),
-                                            product.getString("userimage")
-                                    ));
-                                }
-                            }
-
-                            StaggeredRecyclerViewAdapterdua adapter = new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
-
-                            if (adapter != null){
-                                recyclerView.setAdapter(adapter);
-
-                                loading2.setVisibility(View.INVISIBLE);
-                            }else {
-                                Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
-                            }
-
-//                            loading.dismiss();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-
-        //adding our stringrequest to queue
-        Volley.newRequestQueue(getActivity()).add(stringRequest);
     }
 
     private String getId_user(){

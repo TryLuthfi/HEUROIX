@@ -73,10 +73,16 @@ public class FragmentActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    public void an(View view) {
-        Intent intent = new Intent(FragmentActivity.this, SplashScreen.class);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    public void search(View view) {
+        Intent intent = new Intent(FragmentActivity.this, MainActivity.class);
         startActivity(intent);
-        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

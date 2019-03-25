@@ -4,11 +4,13 @@ public class konfigurasi {
     public static final String TAG_JSON_ARRAY = "datauser";
     public static final String TAG_JSON_ARRAY2 = "datacontent";
     public static final String TAG_JSON_ARRAY3 = "datalike";
+    public static final String TAG_JSON_ARRAY4 = "dataima";
 
     public static final String URL_GET_DATAUSER = "http://heuroix.000webhostapp.com/datauser.php";
     public static final String URL_GET_DATACONTENT = "http://heuroix.000webhostapp.com/datacontent.php";
     public static final String URL_GET_DATALIKE = "http://heuroix.000webhostapp.com/uploadimage.php";
     public static final String URL_GET_UPLOAD_IMAGE = "http://heuroix.000webhostapp.com/uploadimage.php";
+    public static final String URL_GET_DATAIMA = "http://imaindonesia.000webhostapp.com/dataima.php";
 
     public static final String id_user = "id_user";
     public static final String nama = "nama";
@@ -30,4 +32,9 @@ public class konfigurasi {
     public static final String suka_status = "suka_status";
     public static final String date_created = "date_created";
     public static final String ADD_BUKTI = "gambar";
+
+    public static final String id_tentang = "id_tentang";
+    public static final String nama_tentang = "nama";
+    public static final String nama_lengkap = "nama_lengkap";
+    public static final String logo = "logo";
 }

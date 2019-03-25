@@ -245,4 +245,8 @@ public class Profile_Preview extends AppCompatActivity {
         //adding our stringrequest to queue
         Volley.newRequestQueue(Profile_Preview.this).add(stringRequest);
     }
+
+    public void back(View view) {
+        finish();
+    }
 }

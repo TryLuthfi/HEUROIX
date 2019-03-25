@@ -141,4 +141,8 @@ public class UserProfile extends AppCompatActivity {
         String id_user = preferences.getString("id_user", "null");
         return id_user;
     }
+
+    public void back(View view) {
+        finish();
+    }
 }

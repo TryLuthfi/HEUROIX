@@ -17,15 +17,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,12 +52,14 @@ public class Home extends AppCompatActivity {
     private Uri contentUri;
     private File f;
     private Bitmap imageUri;
+    private LinearLayout bawah, bawah2, aa;
     private TextView tiga, empat;
     private static final int PICK_IMAGE = 100;
     private ImageView foto;
     private String JSON_STRING;
     private String id_user, nama, username, password, userimage, email, alamat, notelp,register_date;
     private int waktu;
+    Animation anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +67,30 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         tiga = findViewById(R.id.tiga);
         empat = findViewById(R.id.empat);
+        aa = findViewById(R.id.aa);
+        bawah = findViewById(R.id.bawah);
+        bawah2 = findViewById(R.id.bawah2);
         Calendar c = Calendar.getInstance();
         SimpleDateFormat date = new SimpleDateFormat("HH");
         String formattedDate = date.format(c.getTime());
         waktu = Integer.parseInt(formattedDate);
         isNetworkConnectionAvailable();
+
+        bawah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bawah2.setVisibility(View.VISIBLE);
+                bawah2.startAnimation(AnimationUtils.loadAnimation(Home.this, R.anim.slide_anim_from_bottom));
+            }
+        });
+
+        bawah2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bawah2.startAnimation(AnimationUtils.loadAnimation(Home.this, R.anim.slide_anim_from_top));
+                bawah2.setVisibility(View.GONE);
+            }
+        });
 
         getJSON();
     }
@@ -139,9 +166,11 @@ public class Home extends AppCompatActivity {
         }
     }
 
+
     public void content(View view) {
         Intent intent = new Intent(Home.this, FragmentActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     @SuppressLint("SetTextI18n")
@@ -236,4 +265,5 @@ public class Home extends AppCompatActivity {
         String id_user = preferences.getString("id_user", "null");
         return id_user;
     }
+
 }
