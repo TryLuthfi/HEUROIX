@@ -6,7 +6,7 @@
     android:id="@+id/linear"
     android:background="#fff"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
+    tools:context=".activity.SplashScreen">
 
 
     <ImageView
