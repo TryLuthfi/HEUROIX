@@ -104,7 +104,7 @@ public class FragmentOne extends Fragment{
                                     ));
                             }
 
-                            ProductAdapter adapter = new ProductAdapter(getActivity(), productList );
+                            ProductAdapter adapter = new ProductAdapter(getActivity(), productList);
 
                             if (adapter != null){
                                 recyclerView.setAdapter(adapter);

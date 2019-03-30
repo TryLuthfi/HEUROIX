@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,8 +40,6 @@ import heuroix.myapps.com.heuroix.R;
 import heuroix.myapps.com.heuroix.konfigurasi.konfigurasi;
 import heuroix.myapps.com.heuroix.request.RequestHandler;
 
-import static heuroix.myapps.com.heuroix.activity.SplashScreen.id_userr;
-
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private Activity mCtx;
@@ -52,7 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     DownloadManager downloadManager;
     public static final String KEY_ID_CONTENT = "id_content";
     public static final String KEY_ID_USER = "id_user";
-    public static final String URL_LIKEPRESSED = "https://heuroix.000webhostapp.com/like.php";
+    public static final String URL_LIKEPRESSED = "https://heuroix.000webhostapp.com/Like.php";
 
 
     public ProductAdapter(Activity mCtx, List<Content> productList) {
@@ -72,10 +69,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(final ProductViewHolder holder, int position) {
 
-        Toast.makeText(mCtx, ""+SplashScreen.id_content, Toast.LENGTH_SHORT).show();
-
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
+
+        Toast.makeText(mCtx, "" + SplashScreen.id_content, Toast.LENGTH_SHORT).show();
 
         final Content product = productList.get(position);
         Glide.with(Objects.requireNonNull(mCtx)).load("https://heuroix.000webhostapp.com/image/" + product.getGambar()).apply(requestOptions).into(holder.gambar);
@@ -88,7 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.email.setText(product.getEmail());
         holder.judul.setText("-" + product.getJudul());
         final String id_userr = getId_user();
-        if(SplashScreen.id_userr.equals(id_userr) && SplashScreen.id_content.equals(product.getId_content())){
+        if (SplashScreen.id_userr.equals(id_userr) && SplashScreen.id_content.equals(product.getId_content())) {
             Glide.with(Objects.requireNonNull(mCtx)).load(R.drawable.likeafter).into(holder.suka);
         } else {
             Glide.with(Objects.requireNonNull(mCtx)).load(R.drawable.likebefore).into(holder.suka);
@@ -206,12 +203,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     download.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                downloadManager = (DownloadManager) mCtx.getSystemService(Context.DOWNLOAD_SERVICE);
-                                Uri uri = Uri.parse("https://heuroix.000webhostapp.com/image/" + product.getGambar());
-                                DownloadManager.Request request = new DownloadManager.Request(uri);
-                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                                Long reference = downloadManager.enqueue(request);
-                                dialog.dismiss();
+                            downloadManager = (DownloadManager) mCtx.getSystemService(Context.DOWNLOAD_SERVICE);
+                            Uri uri = Uri.parse("https://heuroix.000webhostapp.com/image/" + product.getGambar());
+                            DownloadManager.Request request = new DownloadManager.Request(uri);
+                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                            Long reference = downloadManager.enqueue(request);
+                            dialog.dismiss();
                         }
                     });
 
@@ -229,12 +226,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     download.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                downloadManager = (DownloadManager) mCtx.getSystemService(Context.DOWNLOAD_SERVICE);
-                                Uri uri = Uri.parse("https://heuroix.000webhostapp.com/image/" + product.getGambar());
-                                DownloadManager.Request request = new DownloadManager.Request(uri);
-                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                                Long reference = downloadManager.enqueue(request);
-                                dialog.dismiss();
+                            downloadManager = (DownloadManager) mCtx.getSystemService(Context.DOWNLOAD_SERVICE);
+                            Uri uri = Uri.parse("https://heuroix.000webhostapp.com/image/" + product.getGambar());
+                            DownloadManager.Request request = new DownloadManager.Request(uri);
+                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                            Long reference = downloadManager.enqueue(request);
+                            dialog.dismiss();
                         }
                     });
                 }
@@ -278,6 +275,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         });
 
     }
+
     @Override
     public int getItemCount() {
         return productList.size();
@@ -309,7 +307,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
-    private String getId_user(){
+    private String getId_user() {
         SharedPreferences preferences = mCtx.getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String id_user = preferences.getString("id_user", "null");
         return id_user;

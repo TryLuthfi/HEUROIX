@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent"
     tools:context=".fragment.FragmentFour">
 
@@ -33,6 +34,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:background="#fff"
                 android:id="@+id/dua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
