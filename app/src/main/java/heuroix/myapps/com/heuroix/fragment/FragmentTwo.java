@@ -39,7 +39,7 @@ public class FragmentTwo extends Fragment {
 
     private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreviewrandom.php";
     Context context;
-    private static final int NUM_COLUMNS = 2;
+    private static final int NUM_COLUMNS = 3;
     List<ContentFoto> productList;
     RecyclerView recyclerView;
     View view;

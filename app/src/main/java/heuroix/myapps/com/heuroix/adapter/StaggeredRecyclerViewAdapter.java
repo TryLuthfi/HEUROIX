@@ -2,6 +2,7 @@ package heuroix.myapps.com.heuroix.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,8 +33,9 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
         this.productList = productList;
     }
 
+    @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_grid_item, parent, false);
 
         return new ProductViewHolder(view);

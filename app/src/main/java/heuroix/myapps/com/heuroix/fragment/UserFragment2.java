@@ -109,6 +109,7 @@ public class UserFragment2 extends Fragment {
                             ProductAdapter adapter = new ProductAdapter(getActivity(), productList);
 
                             if (adapter != null){
+                                if (!isAdded()) return;
                                 recyclerView.setAdapter(adapter);
 
                                 loading.setVisibility(View.INVISIBLE);

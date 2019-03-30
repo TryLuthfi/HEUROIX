@@ -72,7 +72,7 @@ public class FragmentFour extends Fragment {
                 icon2.setBackgroundResource(R.drawable.rectangle);
 //                btn2.setTextColor(Color.parseColor("#c23c1b"));
 //                btn1.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent ));
-                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id. frame_container , new UserFragment1());
                 fragmentTransaction.commit();
@@ -85,7 +85,7 @@ public class FragmentFour extends Fragment {
                 icon2.setBackgroundResource(R.drawable.rectangleafter);
 //                btn1.setTextColor(Color.parseColor("#c23c1b"));
 //                btn2.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent ));
-                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id. frame_container , new UserFragment2());
                 fragmentTransaction.commit();
@@ -135,7 +135,7 @@ public class FragmentFour extends Fragment {
                     RequestOptions requestOptions = new RequestOptions()
                             .placeholder(R.drawable.ic_launcher_background);
                     if(userimage.equals("empty")){
-                        Glide.with(getActivity()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar2);
+                        Glide.with(Objects.requireNonNull(getActivity())).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar2);
                     } else {
                         Glide.with((Objects.requireNonNull(getActivity()))).load("https://heuroix.000webhostapp.com/userImage/" + userimage).apply(requestOptions).into(gambar2);
                     }

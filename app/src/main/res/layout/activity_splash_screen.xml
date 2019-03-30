@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:id="@+id/linear"
     android:background="#fff"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".activity.SplashScreen">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/show"
+        android:layout_height="wrap_content" />
 
 
     <ImageView

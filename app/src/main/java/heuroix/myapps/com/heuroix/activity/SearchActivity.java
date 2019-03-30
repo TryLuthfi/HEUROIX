@@ -1,8 +1,11 @@
 package heuroix.myapps.com.heuroix.activity;
 
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +37,7 @@ import java.util.List;
 import heuroix.myapps.com.heuroix.R;
 import heuroix.myapps.com.heuroix.adapter.UserAdapter;
 import heuroix.myapps.com.heuroix.json.User;
+import heuroix.myapps.com.heuroix.konfigurasi.konfigurasi;
 import heuroix.myapps.com.heuroix.request.MyApplication;
 import heuroix.myapps.com.heuroix.request.MyDividerItemDecoration;
 
@@ -43,7 +47,6 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
     private List<User> contactList;
     private UserAdapter mAdapter;
     private SearchView searchView;
-    private static final String URL = "http://heuroix.000webhostapp.com/userpreview.php";
     Spinner spinner;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -56,7 +59,9 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("User");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
 
         whiteNotificationBar(recyclerView);
 
@@ -73,11 +78,17 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
         fetchContacts();
     }
 
-    /**
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    /**r
      * fetches json by making http calls
      */
     private void fetchContacts() {
-        JsonArrayRequest request = new JsonArrayRequest(URL,
+        JsonArrayRequest request = new JsonArrayRequest(konfigurasi.SEARCH,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -89,11 +100,9 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
                         List<User> items = new Gson().fromJson(response.toString(), new TypeToken<List<User>>() {
                         }.getType());
 
-                        // adding contacts to contacts list
                         contactList.clear();
                         contactList.addAll(items);
 
-                        // refreshing recycler view
                         mAdapter.notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {

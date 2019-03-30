@@ -8,34 +8,33 @@
     tools:context=".activity.ContentClicked">
 
     <ImageView
-        android:maxHeight="200dp"
-        android:adjustViewBounds="true"
         android:id="@+id/gambar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:adjustViewBounds="true"
+        android:maxHeight="200dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:layout_below="@id/gambar"
-        android:layout_height="match_parent">
+        android:gravity="center">
 
         <ProgressBar
-            android:indeterminate="true"
-            android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="#a69393"
             android:id="@+id/loading"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#a69393"
+            android:indeterminateTintMode="src_atop" />
     </LinearLayout>
 
 
-
     <ScrollView
-        android:layout_below="@id/gambar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gambar">
 
         <LinearLayout
             android:id="@+id/linear"
@@ -43,14 +42,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/judul"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:text="judul gambar"
-                android:textColor="#2d2b2b"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/judul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:text="judul Content"
+                    android:textColor="#2d2b2b"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_weight="4"
+                    android:layout_marginRight="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/popup"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/more" />
+                </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,19 +99,20 @@
                 </LinearLayout>
 
                 <Button
-                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@null"
                     android:text="Share"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccent"
+                    android:visibility="invisible" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center">
+
                     <Button
                         android:id="@+id/idbtn"
                         android:layout_width="30dp"

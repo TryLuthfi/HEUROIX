@@ -48,19 +48,11 @@ public class Profile_Preview extends AppCompatActivity {
     private RelativeLayout linear;
     private ProgressBar loading, loading2;
 
-    private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreview.php";
     Context context;
     private static final int NUM_COLUMNS = 3;
     List<Content> productList;
     RecyclerView recyclerView;
     View view;
-
-//    @BindView(R.id.frame_container)
-//    FrameLayout frameContainer;
-//    @BindView(R.id.btn1)
-//    Button btnFragment1;
-//    @BindView(R.id.btn2)
-//    Button btnFragment2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +120,11 @@ public class Profile_Preview extends AppCompatActivity {
 
                 if (mPostKeyIdUser.equals(jo.getString("id_user"))) {
                     if(userimage.equals("empty")){
-                        Glide.with(Profile_Preview.this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar);
-                        Glide.with(Profile_Preview.this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar2);
+                        Glide.with(getApplicationContext()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar);
+                        Glide.with(getApplicationContext()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar2);
                     } else {
-                        Glide.with(Profile_Preview.this).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar);
-                        Glide.with(Profile_Preview.this).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar2);
+                        Glide.with(getApplicationContext()).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar);
+                        Glide.with(getApplicationContext()).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar2);
                     }
 
                     nama.setText(""+namaa);
@@ -175,7 +167,7 @@ public class Profile_Preview extends AppCompatActivity {
     }
     private void loadProducts() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PRODUCTS,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, konfigurasi.URL_PRODUCTS,
 
                 new Response.Listener<String>() {
                     @Override

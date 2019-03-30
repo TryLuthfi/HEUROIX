@@ -18,23 +18,48 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/judul"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:paddingHorizontal="20dp"
-                android:text="-Final DBL CIMPERS V LUCKIERS"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/judul"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:paddingHorizontal="20dp"
+                    android:text="-JUDUL"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_weight="5"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/popup"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/more" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/gambar"
-                android:background="#b69c8a8a"
                 android:layout_width="match_parent"
-                android:maxHeight="400dp"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:layout_height="wrap_content" />
+                android:background="#B6C9B9B9"
+                android:maxHeight="320dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,10 +97,11 @@
                     android:textColor="@color/colorAccent" />
 
                 <LinearLayout
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center">
+
                     <Button
                         android:id="@+id/idbtn"
                         android:layout_width="30dp"
@@ -112,7 +138,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Indonesia Indah"
                         android:textColor="#000"
                         android:textSize="15sp" />
 

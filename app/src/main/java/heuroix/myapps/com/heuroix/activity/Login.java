@@ -31,12 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import heuroix.myapps.com.heuroix.R;
+import heuroix.myapps.com.heuroix.konfigurasi.konfigurasi;
 
 public class Login extends AppCompatActivity {
-    public static final String LOGIN_URL = "https://heuroix.000webhostapp.com/login.php";
-    public static final String KEY_USERNAME = "username";
-    public static final String KEY_PASSWORD = "password";
-    public static final String LOGIN_SUCCESS = "success";
     private EditText usernameE, passwordE;
     private Context context;
     private ImageView foto;
@@ -125,14 +122,14 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Login Process...");
         showDialog();
         //Creating a string request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, konfigurasi.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Log.e("idpelangan",response.toString());
                         //If we are getting success from server
-                        if (response.contains(LOGIN_SUCCESS)) {
+                        if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
                             String id_user = response.toString().split(";")[1];
                             Log.e("iniidpelanggan", id_user);
@@ -159,8 +156,8 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 //Adding parameters to request
-                params.put(KEY_USERNAME, username);
-                params.put(KEY_PASSWORD, password);
+                params.put(konfigurasi.KEY_USERNAME, username);
+                params.put(konfigurasi.KEY_PASSWORD, password);
 
                 //returning parameter
                 return params;

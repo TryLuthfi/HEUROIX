@@ -112,6 +112,7 @@ public class UserFragment1 extends Fragment {
                             StaggeredRecyclerViewAdapterdua adapter = new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
 
                             if (adapter != null){
+                                if (!isAdded()) return;
                                 recyclerView.setAdapter(adapter);
 
                                 loading.setVisibility(View.INVISIBLE);

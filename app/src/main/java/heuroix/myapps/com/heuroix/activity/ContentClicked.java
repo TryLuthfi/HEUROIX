@@ -2,17 +2,26 @@ package heuroix.myapps.com.heuroix.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -30,7 +39,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class ContentClicked extends AppCompatActivity {
 
-    private ImageView gambar, suka,userImage;
+    private ImageView gambar, suka, userImage, popup;
     private TextView jumlahsuka, judul, nama, email, deskripsi, aa;
     private LinearLayout linear, user;
     private ProgressBar loading;
@@ -42,15 +51,14 @@ public class ContentClicked extends AppCompatActivity {
     private String mPostKeyEmail = null;
     private String mPostKeyUserImage = null;
     private String mPostKeyDeskripsi = null;
-
-    private String JSON_STRING;
-    private String id_user, namaa, username, password, userimage, emaill, alamat, notelp,register_date,
-    id_content, judull, gambarr, deskripsii,date_created ;
-    private int suka_status;
+    DownloadManager downloadManager;
 
     public static final String KEY_ID_CONTENT = "id_content";
-    public static final String URL_LIKEPRESSED = "https://heuroix.000webhostapp.com/likepressed.php";
-    public static final String URL_UNLIKEPRESSED = "https://heuroix.000webhostapp.com/unlikepressed.php";
+
+    private String JSON_STRING;
+    private String id_user, namaa, username, password, userimage, emaill, alamat, notelp, register_date,
+            id_content, judull, gambarr, deskripsii, date_created;
+    private int suka_status;
 
 
     @Override
@@ -69,7 +77,7 @@ public class ContentClicked extends AppCompatActivity {
         linear = findViewById(R.id.linear);
         user = findViewById(R.id.user);
         loading = findViewById(R.id.loading);
-
+        popup = findViewById(R.id.popup);
 
         loading.setVisibility(View.VISIBLE);
         linear.setVisibility(View.INVISIBLE);
@@ -92,6 +100,7 @@ public class ContentClicked extends AppCompatActivity {
         });
 
         getJSON();
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -103,7 +112,7 @@ public class ContentClicked extends AppCompatActivity {
             JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY2);
 
             for (int i = 0; i < result.length(); i++) {
-                JSONObject jo = result.getJSONObject(i);
+                final JSONObject jo = result.getJSONObject(i);
                 id_content = jo.getString(konfigurasi.id_content);
                 judull = jo.getString(konfigurasi.judul);
                 gambarr = jo.getString(konfigurasi.gambar);
@@ -137,17 +146,138 @@ public class ContentClicked extends AppCompatActivity {
                         }
                     });
                     email.setText("" + emaill);
-                    deskripsi.setText(""+deskripsii);
-                    if(userimage.equals("empty")){
-                        Glide.with(ContentClicked.this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(userImage);
+                    deskripsi.setText("" + deskripsii);
+                    if (userimage.equals("empty")) {
+                        Glide.with(getApplicationContext()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(userImage);
                     } else {
-                        Glide.with(ContentClicked.this).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(userImage);
+                        Glide.with(getApplicationContext()).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(userImage);
                     }
-                    Glide.with((ContentClicked.this)).load(R.drawable.likebefore).into(suka);
+                    Glide.with(getApplicationContext()).load(R.drawable.likebefore).into(suka);
                     suka.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Glide.with((ContentClicked.this)).load(R.drawable.likeafter).into(suka);
+                            Glide.with(getApplicationContext()).load(R.drawable.likeafter).into(suka);
+                        }
+                    });
+
+                    final String id_userrrr = getIdUser();
+                    popup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final Dialog dialog = new Dialog(ContentClicked.this);
+                            dialog.setCancelable(true);
+                            dialog.setCanceledOnTouchOutside(true);
+                            try {
+                                if (id_userrrr.equals(jo.getString("id_user"))) {
+                                    dialog.setContentView(R.layout.custom_button_for_user);
+                                    TextView delete = dialog.findViewById(R.id.delete);
+                                    TextView download = dialog.findViewById(R.id.download);
+                                    TextView edit = dialog.findViewById(R.id.edit);
+                                    delete.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            final Dialog dialog2 = new Dialog(ContentClicked.this);
+                                            dialog2.setCancelable(true);
+                                            dialog2.setCanceledOnTouchOutside(true);
+                                            dialog2.setContentView(R.layout.custom_popup_dialog);
+                                            dialog.dismiss();
+                                            Button tidak = dialog2.findViewById(R.id.tidak);
+                                            Button ya = dialog2.findViewById(R.id.ya);
+
+                                            ya.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    class AddData extends AsyncTask<Void, Void, String> {
+
+                                                        ProgressDialog loading;
+
+                                                        @Override
+                                                        protected void onPreExecute() {
+                                                            super.onPreExecute();
+                                                            loading = ProgressDialog.show(ContentClicked.this, "Sedang Dihapus...", "Tunggu...", false, false);
+                                                        }
+
+                                                        @Override
+                                                        protected void onPostExecute(String s) {
+                                                            super.onPostExecute(s);
+                                                            dialog.dismiss();
+                                                            dialog2.dismiss();
+                                                            loading.dismiss();
+                                                            Toast.makeText(ContentClicked.this, s, Toast.LENGTH_LONG).show();
+                                                        }
+
+                                                        @Override
+                                                        protected String doInBackground(Void... v) {
+                                                            HashMap<String, String> params = new HashMap<>();
+                                                            params.put(KEY_ID_CONTENT, mPostKeyIdContent);
+
+                                                            RequestHandler rh = new RequestHandler();
+                                                            String res = rh.sendPostRequest(konfigurasi.URL_DELETE_CONTENT, params);
+                                                            return res;
+                                                        }
+                                                    }
+
+                                                    AddData ae = new AddData();
+                                                    ae.execute();
+                                                }
+                                            });
+                                            tidak.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog.dismiss();
+                                                    dialog2.dismiss();
+                                                }
+                                            });
+
+                                            dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                            dialog2.show();
+                                            Window window = dialog2.getWindow();
+                                            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                        }
+                                    });
+
+                                    download.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                                            Uri uri = Uri.parse("https://heuroix.000webhostapp.com/image/" + mPostKeyGambar);
+                                            DownloadManager.Request request = new DownloadManager.Request(uri);
+                                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                            Long reference = downloadManager.enqueue(request);
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    edit.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Toast.makeText(ContentClicked.this, "belum ada", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                } else {
+                                    dialog.setContentView(R.layout.custom_button);
+                                    TextView download = dialog.findViewById(R.id.download);
+                                    download.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                                            Uri uri = Uri.parse("https://heuroix.000webhostapp.com/image/" + mPostKeyGambar);
+                                            DownloadManager.Request request = new DownloadManager.Request(uri);
+                                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                            Long reference = downloadManager.enqueue(request);
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.show();
+                            Window window = dialog.getWindow();
+                            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         }
                     });
 
@@ -201,63 +331,9 @@ public class ContentClicked extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addData(final String id_content) {
-        class AddData extends AsyncTask<Void, Void, String> {
-
-            ProgressDialog loading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-            }
-
-            @Override
-            protected String doInBackground(Void... v) {
-                HashMap<String, String> params = new HashMap<>();
-                params.put(KEY_ID_CONTENT, id_content);
-
-                RequestHandler rh = new RequestHandler();
-                String res = rh.sendPostRequest(URL_LIKEPRESSED, params);
-                return res;
-            }
-        }
-
-        AddData ae = new AddData();
-        ae.execute();
-    }
-
-    private void addData2(final String id_content) {
-        class AddData extends AsyncTask<Void, Void, String> {
-
-            ProgressDialog loading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-            }
-
-            @Override
-            protected String doInBackground(Void... v) {
-                HashMap<String, String> params = new HashMap<>();
-                params.put(KEY_ID_CONTENT, id_content);
-
-                RequestHandler rh = new RequestHandler();
-                String res = rh.sendPostRequest(URL_UNLIKEPRESSED, params);
-                return res;
-            }
-        }
-
-        AddData ae = new AddData();
-        ae.execute();
+    private String getIdUser() {
+        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String id_user = preferences.getString("id_user", "null");
+        return id_user;
     }
 }

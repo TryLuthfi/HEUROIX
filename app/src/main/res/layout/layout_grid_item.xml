@@ -19,7 +19,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/imageview_widget"
                 android:scaleType="center"/>
@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/name_widget"
+                android:maxLines="1"
                 android:layout_below="@+id/imageview_widget"
                 android:layout_marginTop="10dp"
                 android:textColor="#000"/>

@@ -36,7 +36,7 @@ import heuroix.myapps.com.heuroix.adapter.ProductAdapter;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentOne extends Fragment {
+public class FragmentOne extends Fragment{
     Context context;
     Target<Drawable> belum, sudah;
     private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreview.php";
@@ -104,7 +104,7 @@ public class FragmentOne extends Fragment {
                                     ));
                             }
 
-                            ProductAdapter adapter = new ProductAdapter(getActivity(), productList);
+                            ProductAdapter adapter = new ProductAdapter(getActivity(), productList );
 
                             if (adapter != null){
                                 recyclerView.setAdapter(adapter);
@@ -131,7 +131,5 @@ public class FragmentOne extends Fragment {
         //adding our stringrequest to queue
         Volley.newRequestQueue(Objects.requireNonNull(getActivity())).add(stringRequest);
     }
-
-
 
 }

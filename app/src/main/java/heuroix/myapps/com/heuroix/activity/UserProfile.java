@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -33,10 +34,11 @@ import heuroix.myapps.com.heuroix.request.RequestHandler;
 public class UserProfile extends AppCompatActivity {
     private ImageView gambar, gambar2;
     private TextView nama, nama2, username, password, email, alamat, notelp;
-    private String id_user, namaa, usernamee, passwordd, userimage, emaill, alamatt, notelpp, register_date;
+    public String id_user, namaa = null, usernamee, passwordd, userimage, emaill, alamatt, notelpp, register_date;
     private String JSON_STRING;
     private RelativeLayout linear;
     private ProgressBar loading;
+    public String namaIntent, userimageIntent, usernameIntent, passwordIntent, emailIntent, alamatIntent, notelpIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,15 +116,23 @@ public class UserProfile extends AppCompatActivity {
 
                 String id_user = getId_user();
                 if (id_user.equals(jo.getString("id_user"))) {
+                    namaIntent = namaa;
+                    userimageIntent = userimage;
+                    usernameIntent = usernamee;
+                    passwordIntent = passwordd;
+                    emailIntent = emaill;
+                    alamatIntent = alamatt;
+                    notelpIntent = notelpp;
+
                     RequestOptions requestOptions = new RequestOptions()
                             .placeholder(R.drawable.ic_launcher_background);
 
                     if (userimage.equals("empty")) {
-                        Glide.with(UserProfile.this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar);
-                        Glide.with(UserProfile.this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar2);
+                        Glide.with(getApplicationContext()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar);
+                        Glide.with(getApplicationContext()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(gambar2);
                     } else {
-                        Glide.with(UserProfile.this).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar);
-                        Glide.with(UserProfile.this).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar2);
+                        Glide.with(getApplicationContext()).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar);
+                        Glide.with(getApplicationContext()).load("https://heuroix.000webhostapp.com/userImage/" + userimage).into(gambar2);
                     }
 
                     nama.setText(namaa);

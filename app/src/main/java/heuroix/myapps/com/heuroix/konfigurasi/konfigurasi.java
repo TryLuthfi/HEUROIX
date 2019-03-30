@@ -4,13 +4,22 @@ public class konfigurasi {
     public static final String TAG_JSON_ARRAY = "datauser";
     public static final String TAG_JSON_ARRAY2 = "datacontent";
     public static final String TAG_JSON_ARRAY3 = "datalike";
-    public static final String TAG_JSON_ARRAY4 = "dataima";
+
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_PASSWORD = "password";
+    public static final String LOGIN_SUCCESS = "success";
+
+    public static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreview.php";
+    public static final String SEARCH = "http://heuroix.000webhostapp.com/userpreview.php";
 
     public static final String URL_GET_DATAUSER = "http://heuroix.000webhostapp.com/datauser.php";
     public static final String URL_GET_DATACONTENT = "http://heuroix.000webhostapp.com/datacontent.php";
-    public static final String URL_GET_DATALIKE = "http://heuroix.000webhostapp.com/uploadimage.php";
+    public static final String URL_GET_DATALIKE = "http://heuroix.000webhostapp.com/datalike.php";
+
     public static final String URL_GET_UPLOAD_IMAGE = "http://heuroix.000webhostapp.com/uploadimage.php";
-    public static final String URL_GET_DATAIMA = "http://imaindonesia.000webhostapp.com/dataima.php";
+
+    public static final String LOGIN_URL = "https://heuroix.000webhostapp.com/login.php";
+    public static final String URL_DELETE_CONTENT = "https://heuroix.000webhostapp.com/delete.php";
 
     public static final String id_user = "id_user";
     public static final String nama = "nama";
