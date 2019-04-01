@@ -194,7 +194,8 @@ public class Profile_Preview extends AppCompatActivity {
                                             product.getString("date_created"),
                                             product.getString("nama"),
                                             product.getString("email"),
-                                            product.getString("userimage")
+                                            product.getString("userimage"),
+                                            product.getString("likecontent")
                                     ));
                                 }
                             }

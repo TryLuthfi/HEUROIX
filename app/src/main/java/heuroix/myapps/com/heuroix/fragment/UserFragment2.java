@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class UserFragment2 extends Fragment {
     List<Content> productList;
     RecyclerView recyclerView;
     View view;
+    LinearLayout loadingbackground;
 
 
     public UserFragment2() {
@@ -64,6 +66,7 @@ public class UserFragment2 extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         loading = view.findViewById(R.id.loading);
+        loadingbackground = view.findViewById(R.id.loadingbackground);
         loading.setVisibility(View.VISIBLE);
 
         loadProducts();
@@ -101,7 +104,8 @@ public class UserFragment2 extends Fragment {
                                             product.getString("date_created"),
                                             product.getString("nama"),
                                             product.getString("email"),
-                                            product.getString("userimage")
+                                            product.getString("userimage"),
+                                            product.getString("likecontent")
                                     ));
                                 }
                             }
@@ -113,6 +117,7 @@ public class UserFragment2 extends Fragment {
                                 recyclerView.setAdapter(adapter);
 
                                 loading.setVisibility(View.INVISIBLE);
+                                loadingbackground.setVisibility(View.INVISIBLE);
                             }else {
                                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
                             }

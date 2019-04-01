@@ -30,6 +30,7 @@ public class SplashScreen extends AppCompatActivity {
     private String JSON_STRING;
     int index = 0;
     public static TextView show;
+    public static JSONArray result;
 
 
     @Override
@@ -99,7 +100,7 @@ public class SplashScreen extends AppCompatActivity {
         ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY3);
+            result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY3);
 
             for (int i = 0; i < result.length(); i++) {
                 JSONObject jo = result.getJSONObject(i);

@@ -63,13 +63,16 @@ public class FragmentFour extends Fragment {
 
         final LinearLayout btn1 = view.findViewById(R.id.btn_fragment1);
         final LinearLayout btn2 = view.findViewById(R.id.btn_fragment2);
+        final LinearLayout btn3 = view.findViewById(R.id.btn_fragment3);
         final ImageView icon1 = view.findViewById(R.id.icon1);
         final ImageView icon2 = view.findViewById(R.id.icon2);
+        final ImageView icon3 = view.findViewById(R.id.icon3);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 icon1.setBackgroundResource(R.drawable.listafter);
                 icon2.setBackgroundResource(R.drawable.rectangle);
+                icon3.setBackgroundResource(R.drawable.heart);
 //                btn2.setTextColor(Color.parseColor("#c23c1b"));
 //                btn1.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent ));
                 FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
@@ -83,11 +86,22 @@ public class FragmentFour extends Fragment {
             public void onClick(View v) {
                 icon1.setBackgroundResource(R.drawable.list);
                 icon2.setBackgroundResource(R.drawable.rectangleafter);
-//                btn1.setTextColor(Color.parseColor("#c23c1b"));
-//                btn2.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent ));
+                icon3.setBackgroundResource(R.drawable.heart);
                 FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id. frame_container , new UserFragment2());
+                fragmentTransaction.commit();
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon1.setBackgroundResource(R.drawable.list);
+                icon2.setBackgroundResource(R.drawable.rectangle);
+                icon3.setBackgroundResource(R.drawable.heartafter);
+                FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id. frame_container , new UserFragment3());
                 fragmentTransaction.commit();
             }
         });

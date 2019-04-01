@@ -17,6 +17,7 @@ public class konfigurasi {
     public static final String URL_GET_DATALIKE = "http://heuroix.000webhostapp.com/datalike.php";
 
     public static final String URL_GET_UPLOAD_IMAGE = "http://heuroix.000webhostapp.com/uploadimage.php";
+    public static final String URL_LIKEPRESSED = "https://heuroix.000webhostapp.com/like.php";
 
     public static final String LOGIN_URL = "https://heuroix.000webhostapp.com/login.php";
     public static final String URL_DELETE_CONTENT = "https://heuroix.000webhostapp.com/delete.php";
@@ -41,9 +42,4 @@ public class konfigurasi {
     public static final String suka_status = "suka_status";
     public static final String date_created = "date_created";
     public static final String ADD_BUKTI = "gambar";
-
-    public static final String id_tentang = "id_tentang";
-    public static final String nama_tentang = "nama";
-    public static final String nama_lengkap = "nama_lengkap";
-    public static final String logo = "logo";
 }

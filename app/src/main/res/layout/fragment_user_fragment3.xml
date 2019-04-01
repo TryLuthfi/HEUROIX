@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.UserFragment1">
+    tools:context=".fragment.UserFragment3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,25 +38,25 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Anda Belum Membuat Postingan Apapun.Posting untuk melihat postingan"
+            android:text="Silahkan Sukai Postingan orang lain untuk melihat postingan yang anda sukai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:background="#fff"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
+        android:background="#fff"
         android:id="@+id/recylcerView"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:background="#fff"
-        android:id="@+id/loadingbackground"
-        android:layout_below="@id/atasetext"
         android:layout_width="match_parent"
         android:gravity="center"
+        android:id="@+id/loadingbackground"
+        android:layout_below="@id/atasetext"
         android:layout_above="@id/bawahetext"
         android:layout_height="match_parent">
 

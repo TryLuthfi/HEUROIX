@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import heuroix.myapps.com.heuroix.R;
 import heuroix.myapps.com.heuroix.konfigurasi.konfigurasi;
@@ -54,6 +56,9 @@ public class ContentClicked extends AppCompatActivity {
     DownloadManager downloadManager;
 
     public static final String KEY_ID_CONTENT = "id_content";
+    public static final String KEY_ID_USER = "id_user";
+
+    private static final String TAG = "ContentClicked";
 
     private String JSON_STRING;
     private String id_user, namaa, username, password, userimage, emaill, alamat, notelp, register_date,
@@ -134,6 +139,7 @@ public class ContentClicked extends AppCompatActivity {
                 list.add(data);
 
                 if (mPostKeyIdContent.equals(jo.getString("id_content"))) {
+                    final String id_userrrr = getIdUser();
                     judul.setText("" + judull);
                     nama.setText("" + namaa);
                     user.setOnClickListener(new View.OnClickListener() {
@@ -157,10 +163,36 @@ public class ContentClicked extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Glide.with(getApplicationContext()).load(R.drawable.likeafter).into(suka);
+                            class AddData extends AsyncTask<Void, Void, String> {
+
+                                @Override
+                                protected void onPreExecute() {
+                                    super.onPreExecute();
+                                }
+
+                                @Override
+                                protected void onPostExecute(String s) {
+                                    super.onPostExecute(s);
+                                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                                    Log.d(TAG, "onPostExecute: " + s);
+                                }
+
+                                @Override
+                                protected String doInBackground(Void... v) {
+                                    HashMap<String, String> params = new HashMap<>();
+                                    params.put(KEY_ID_CONTENT, mPostKeyIdContent);
+                                    params.put(KEY_ID_USER, id_userrrr);
+
+                                    RequestHandler rh = new RequestHandler();
+                                    String res = rh.sendPostRequest(konfigurasi.URL_LIKEPRESSED, params);
+                                    return res;
+                                }
+                            }
+
+                            AddData ae = new AddData();
+                            ae.execute();
                         }
                     });
-
-                    final String id_userrrr = getIdUser();
                     popup.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

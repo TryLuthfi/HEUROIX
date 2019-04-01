@@ -10,8 +10,9 @@ public class Content {
     private String nama;
     private String email;
     private String userimage;
+    private String likecontent;
 
-    public Content(String id_content, String id_user, String judul, String gambar, String deskripsi, String date_created, String nama, String email, String userimage) {
+    public Content(String id_content, String id_user, String judul, String gambar, String deskripsi, String date_created, String nama, String email, String userimage, String likecontent) {
         this.id_content = id_content;
         this.id_user = id_user;
         this.judul = judul;
@@ -21,6 +22,7 @@ public class Content {
         this.nama = nama;
         this.email = email;
         this.userimage = userimage;
+        this.likecontent = likecontent;
     }
 
     public String getId_content() {
@@ -57,5 +59,9 @@ public class Content {
 
     public String getUserimage() {
         return userimage;
+    }
+
+    public String getLikecontent() {
+        return likecontent;
     }
 }

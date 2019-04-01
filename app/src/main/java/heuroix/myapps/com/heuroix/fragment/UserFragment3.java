@@ -1,16 +1,19 @@
 package heuroix.myapps.com.heuroix.fragment;
 
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,26 +31,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import heuroix.myapps.com.heuroix.json.Content;
 import heuroix.myapps.com.heuroix.R;
-import heuroix.myapps.com.heuroix.adapter.ProductAdapter;
-
+import heuroix.myapps.com.heuroix.adapter.StaggeredRecyclerViewAdapterdua;
+import heuroix.myapps.com.heuroix.json.Content;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentOne extends Fragment{
-    Context context;
-    Target<Drawable> belum, sudah;
+public class UserFragment3 extends Fragment {
+    private ProgressBar loading;
     private static final String URL_PRODUCTS = "https://heuroix.000webhostapp.com/contentpreview.php";
+    Context context;
+    private static final int NUM_COLUMNS = 3;
     List<Content> productList;
     RecyclerView recyclerView;
-    private String JSON_STRING;
-    private ProgressBar loading;
     View view;
+    LinearLayout text;
+    LinearLayout loadingbackground;
 
 
-    public FragmentOne() {
+    public UserFragment3() {
         // Required empty public constructor
     }
 
@@ -57,20 +59,25 @@ public class FragmentOne extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_fragment_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_fragment3, container, false);
 
-        recyclerView = view.findViewById(R.id.recylcerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        loading = view.findViewById(R.id.loading);
-        loading.setVisibility(View.VISIBLE);
 
         productList = new ArrayList<>();
 
-        loadProducts();
+        recyclerView = view.findViewById(R.id.recylcerView);
+        StaggeredRecyclerViewAdapterdua staggeredRecyclerViewAdapterdua =
+                new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        recyclerView.setAdapter(staggeredRecyclerViewAdapterdua);
 
-        return view;
+        loading = view.findViewById(R.id.loading);
+        loadingbackground = view.findViewById(R.id.loadingbackground);
+        text = view.findViewById(R.id.text);
+        loading.setVisibility(View.VISIBLE);
+
+        loadProducts();
+        return  view;
     }
 
     private void loadProducts() {
@@ -93,7 +100,7 @@ public class FragmentOne extends Fragment{
 
                                 //adding the product to product list
                                 String id_user = getId_user();
-                                if(product.getString("likecontent").equals("null") | !product.getString("likecontent").equals(id_user) | product.getString("likecontent").equals(id_user) ) {
+                                if (product.getString("likecontent").equals(id_user)) {
                                     productList.add(new Content(
                                             product.getString("id_content"),
                                             product.getString("id_user"),
@@ -109,12 +116,14 @@ public class FragmentOne extends Fragment{
                                 }
                             }
 
-                            ProductAdapter adapter = new ProductAdapter(getActivity(), productList);
+                            StaggeredRecyclerViewAdapterdua adapter = new StaggeredRecyclerViewAdapterdua(getActivity(), productList);
 
                             if (adapter != null){
+                                if (!isAdded()) return;
                                 recyclerView.setAdapter(adapter);
 
                                 loading.setVisibility(View.INVISIBLE);
+                                loadingbackground.setVisibility(View.INVISIBLE);
                             }else {
                                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
                             }
@@ -137,7 +146,7 @@ public class FragmentOne extends Fragment{
         Volley.newRequestQueue(Objects.requireNonNull(getActivity())).add(stringRequest);
     }
 
-    private String getId_user() {
+    private String getId_user(){
         SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String id_user = preferences.getString("id_user", "null");
         return id_user;
