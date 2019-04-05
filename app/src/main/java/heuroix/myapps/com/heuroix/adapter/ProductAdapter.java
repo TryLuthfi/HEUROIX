@@ -196,7 +196,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                                     }
                                 });
 
-                                dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                Objects.requireNonNull(dialog2.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog2.show();
                                 Window window = dialog2.getWindow();
                                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
